@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Simple Image Slider</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+      background: #f0f0f0;
+    }
+    .slider {
+      width: 400px;
+      position: relative;
+      overflow: hidden;
+      border-radius: 10px;
+      box-shadow: 0 0 15px rgba(0,0,0,0.2);
+      background: white;
+    }
+    .slides {
+      display: flex;
+      transition: transform 0.5s ease-in-out;
+      width: 100%;
+    }
+    .slides img {
+      width: 400px;
+      height: 250px;
+      object-fit: cover;
+      user-select: none;
+    }
+    .buttons {
+      position: absolute;
+      width: 100%;
+      top: 50%;
+      display: flex;
+      justify-content: space-between;
+      transform: translateY(-50%);
+    }
+    .btn {
+      background: rgba(0,0,0,0.5);
+      border: none;
+      color: white;
+      font-size: 18px;
+      padding: 8px 12px;
+      cursor: pointer;
+      border-radius: 50%;
+      user-select: none;
+    }
+    .btn:hover {
+      background: rgba(0,0,0,0.8);
+    }
+  </style>
+</head>
+<body>
+
+  <div class="slider">
+    <div class="slides" id="slides">
+      <img src="https://picsum.photos/id/1015/400/250" alt="Image 1">
+      <img src="https://picsum.photos/id/1016/400/250" alt="Image 2">
+      <img src="https://picsum.photos/id/1018/400/250" alt="Image 3">
+      <img src="https://picsum.photos/id/1020/400/250" alt="Image 4">
+    </div>
+    <div class="buttons">
+      <button class="btn" onclick="prev()">‹</button>
+      <button class="btn" onclick="next()">›</button>
+    </div>
+  </div>
+
+  <script>
+    const slides = document.getElementById('slides');
+    const total = slides.children.length;
+    let index = 0;
+
+    function updateSlider() {
+      slides.style.transform = `translateX(${-index * 400}px)`;
+    }
+
+    function next() {
+      index = (index + 1) % total;
+      updateSlider();
+    }
+
+    function prev() {
+      index = (index - 1 + total) % total;
+      updateSlider();
+    }
+  </script>
+
+</body>
+</html>
